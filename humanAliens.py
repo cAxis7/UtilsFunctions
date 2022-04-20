@@ -34,7 +34,7 @@ def getFuncCoffs(zeros):
 
 def printFunction(cfs, state = True):
     size = len(cfs)
-    print(f"{cfs[0] if cfs[0] != 1 else ''}x^{size - 1}" if state else f"- {cfs[0]}x^{size - 1}", end = ' ')
+    print(f"{cfs[0] if cfs[0] != 1 else ''}x^{size - 1}" if state else f"- {cfs[0]}x^{size - 1 if }", end = ' ')
     for i in range(1, len(cfs)):
         state = not state
         print(f"{'+' if state else '-'}", end = ' ')
@@ -44,10 +44,12 @@ if __name__ == "__main__":
     '''
     Let's solve the problem Alien vs Human
 
-    We want to find the function of a polymial graph where each index at a list represents whether f(x)
+    We want to find the function of a polynomial graph where each index i represents whether f(x)
     is positive or negative.
 
-    Where the input is a string of A's and H's, where A represents that at index i a polynomial
+    Where the input is a string of A's and H's, where A represents that at index i a polynomial.
+    Then, will find the zeros of the function and calculate the coefficients and then display the
+    function.
     '''
     list1 = input("Enter a string of A's and H's: ")
     nums = coefficients(list1)
