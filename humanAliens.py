@@ -1,25 +1,23 @@
 from itertools import combinations
 import math
 
-def coefficients(list1):
+def coefficients(str):
     '''
-    This function takes a list of A's and H's, where the latter means that f(x) is negative;
-    while, the former means that f(x) is positive. x equals to the index i * 2. It returns a
-    list of odd numbers where each represent a zero in f(x)
+    This function takes a String of two unique characters where it appends the index i if the
+    next character is different from the previous one. It also multiplies the index by 2 and adds 1.
 
     Parameters:
-    argument1 (list): A list of 'A' and 'H' which represent f(x), where x is the index i * 2, 
-    and A means that f(x) is less than 0 while H means f(x) > 0
+    argument1 (string): a string of two unique characters
 
     Returns:
-    list: Returns a list values x where the f(x) equals 0
+    list: odd integers
     '''
-    return [i * 2 + 1 for i in range(len(list1) - 1) if list1[i] != list1[i+1]]
+    return [i * 2 + 1 for i in range(len(str) - 1) if str[i] != str[i+1]]
 
 def getFuncCoffs(zeros):
     '''
     This function takes a list of Zeros of a polymonomial function
-    and returns the coefficients
+    and returns the coefficients order in descending grade
 
     Parameters:
     argument1 (list): integer
@@ -34,9 +32,25 @@ def getFuncCoffs(zeros):
         list_combinations.append(sum(mult))
     return list_combinations
 
+def printFunction(cfs, state = True):
+    size = len(cfs)
+    print(f"{cfs[0] if cfs[0] != 1 else ''}x^{size - 1}" if state else f"- {cfs[0]}x^{size - 1}", end = ' ')
+    for i in range(1, len(cfs)):
+        state = not state
+        print(f"{'+' if state else '-'}", end = ' ')
+        print(f"{cfs[i] if cfs[i] != 1 else ''}x^{size - 1 - i}", end = ' ')
+
 if __name__ == "__main__":
+    '''
+    Let's solve the problem Alien vs Human
+
+    We want to find the function of a polymial graph where each index at a list represents whether f(x)
+    is positive or negative.
+
+    Where the input is a string of A's and H's, where A represents that at index i a polynomial
+    '''
     list1 = input("Enter a string of A's and H's: ")
     nums = coefficients(list1)
     coffs = getFuncCoffs(nums)
-    print(coffs)
+    printFunction(coffs)
 
